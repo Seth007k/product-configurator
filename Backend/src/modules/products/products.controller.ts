@@ -5,16 +5,15 @@ import { Product } from './product.schema';
 
 @Controller('products')
 export class ProductsController {
-
     constructor(private readonly productsService: ProductsService) { }
 
     @Post()
-    create(@Body() createProductDto: CreateProductDto): Promise<Product> {
+    async create(@Body() createProductDto: CreateProductDto): Promise<Product> {
         return this.productsService.create(createProductDto);
     }
 
     @Get()
-    findAll(): Promise<Product[]> {
+    async findAll(): Promise<Product[]> {
         return this.productsService.findAll();
     }
 }
