@@ -1,7 +1,7 @@
-import { IsNotEmpty, minLength } from "class-validator";
+import { IsNotEmpty, MinLength } from "class-validator";
 
 export class CreateProductDto {
     @IsNotEmpty()
-    @minLength(2)
+    @MinLength(2)
     name: string;
 }
