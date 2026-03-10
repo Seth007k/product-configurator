@@ -3,34 +3,22 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Product, ProductDocument } from './product.schema';
 import { CreateProductDto } from './dto/create-product.dto';
+import { generateProductCode } from './utils/generate-product-code';
 
 @Injectable()
 export class ProductsService {
-
-    constructor(@InjectModel(Product.name) private productModel: Model<ProductDocument>) { }
-
-    private generateCode(name: string): string {
-        const words = name.trim().split(' ');
-
-        if (words.length === 1) return words[0].substring(0, 2).toUpperCase();
-
-        return words.map(w => w[0].toUpperCase()).join('');
-    }
+    constructor(
+        @InjectModel(Product.name) private productModel: Model<ProductDocument>,
+    ) { }
 
     async create(createProductDto: CreateProductDto): Promise<Product> {
 
+        const { name } = createProductDto
 
-        const code = this.generateCode(createProductDto.name);
+        const code = generateProductCode(name)
 
-        const existing = await this.productModel.findOne({ code });
-
-        if (existing) {
-            throw new ConflictException('Product mit diesem Code existiert bereits');
-        }
-
-        const product = new this.productModel({ ...createProductDto, code });
-
-        return product.save();
+        const newProduct = new this.productModel({ name, code });
+        return newProduct.save();
     }
 
     async findAll(): Promise<Product[]> {
