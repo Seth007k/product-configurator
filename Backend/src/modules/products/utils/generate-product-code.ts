@@ -1,15 +1,16 @@
 export function generateProductCode(name: string): string {
-    const trimmed = name.trim()
+    const trimmed = name.trim();
 
     if (!trimmed) {
-        throw new Error('Product name must not be empty')
+        throw new Error('Product name must not be empty');
     }
 
-    const words = trimmed.split(/\s+/)
+    const consonants = trimmed
+        .replace(/[aeiouäöüAEIOUÄÖÜ]/g, '')
+        .replace(/[^a-zA-Z]/g, '');
 
-    if (words.length >= 2) {
-        return words.map(w => w[0]).join('').toUpperCase().slice(0, 4)
-    }
+    const code =
+        consonants.length >= 2 ? consonants.slice(0, 2) : trimmed.slice(0, 2);
 
-    return trimmed.slice(0, 2).toUpperCase()
+    return code.toUpperCase();
 }
