@@ -12,13 +12,22 @@ export class ProductsService {
     ) { }
 
     async create(createProductDto: CreateProductDto): Promise<Product> {
+        let baseCode = generateProductCode(createProductDto.name)
+        let code = baseCode
+        let counter = 2
 
-        const { name } = createProductDto
+        while (await this.productModel.exists({ code })) {
+            code = `${baseCode}${counter}`
+            counter++
+        }
 
-        const code = generateProductCode(name)
+        const product = new this.productModel({
+            name: createProductDto.name,
+            code,
 
-        const newProduct = new this.productModel({ name, code });
-        return newProduct.save();
+        })
+
+        return product.save()
     }
 
     async findAll(): Promise<Product[]> {
