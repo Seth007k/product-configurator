@@ -16,10 +16,11 @@ export class VariantsService {
         const product = await this.productModel.findById(dto.productId);
         if (!product) throw new NotFoundException('Product not found');
 
-        const variants = await this.variantModel.find({ product: product.id }).sort({ value: 1 });
+        const variants = await this.variantModel.find({ product: product._id }).sort({ value: 1 });
+
         let nextValue = '01';
         if (variants.length > 0) {
-            const lastValue = parseInt(variants[variants.length - 1].value);
+            const lastValue = parseInt(variants[variants.length - 1].value, 10);
             nextValue = String(lastValue + 1).padStart(2, '0');
         }
 
