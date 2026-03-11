@@ -5,7 +5,7 @@ import { AppService } from './app.service';
 import { ProductsModule } from './modules/products/products.module';
 
 @Module({
-  imports: [MongooseModule.forRoot(process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/product-configurator'), ProductsModule,],
+  imports: [MongooseModule.forRoot(process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/products'), ProductsModule,],
   controllers: [AppController],
   providers: [AppService],
 })
