@@ -2,16 +2,8 @@
 
 import { useState } from "react";
 import { createProduct } from "../lib/api";
+import { Product, Props } from "../types";
 
-type Product = {
-    _id: string;
-    name: string;
-    code: string
-};
-
-type Props = {
-    onCreated: (product: Product) => void;
-};
 
 export default function ProductForm({ onCreated }: Props) {
     const [name, setName] = useState("");

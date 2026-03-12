@@ -1,10 +1,7 @@
+import { Assignment } from "../types";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
 
-type Assignment = {
-    baureihe: string;
-    modelle: string[];
-};
 
 export async function createProduct(name: string) {
     const res = await fetch(`${API_URL}/products`, {
