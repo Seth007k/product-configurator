@@ -12,6 +12,13 @@ export class VariantsService {
         @InjectModel(Product.name) private productModel: Model<ProductDocument>
     ) { }
 
+    /**
+     * Erstellt eine neue Variante für ein bestimmtes Produkt.
+     * Berechnet den nächsten Variantencode (z.B. "01", "02").
+     * dto - Das DTO mit Produkt-ID und Zuweisungen
+     * return - Das gespeicherte Varianten-Dokument
+     * throw NotFoundException Wenn das Produkt nicht existiert
+     */
     async create(dto: CreateVariantDto): Promise<Variant> {
         const product = await this.productModel.findById(dto.productId);
         if (!product) throw new NotFoundException('Product not found');
@@ -33,6 +40,11 @@ export class VariantsService {
         return variant.save();
     }
 
+    /**
+     * Ruft alle Varianten eines bestimmten Produkts ab.
+     * productId - Die ID des Produkts
+     * return - Ein Array der zugehörigen Varianten
+     */
     async findAllByProduct(productId: string): Promise<Variant[]> {
         return this.variantModel
             .find({ product: new Types.ObjectId(productId) })

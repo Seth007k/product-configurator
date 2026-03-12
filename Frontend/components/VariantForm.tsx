@@ -2,33 +2,19 @@
 
 import { useState } from "react";
 import { createVariant } from "../lib/api";
+import { Product, Variant, Assignment } from "../types";
 
-type Product = {
-    _id: string;
-    name: string;
-    code: string;
+type VariantFormProps = {
+    Product: Product;
+    onCreated?: (productId: string, variant: Variant) => void;
 };
 
-type Assignment = {
-    baureihe: string;
-    modelle: string[];
-};
-
-type Variant = {
-    _id: string;
-    value: string
-    assignments: Assignment[];
-    product: Product;
-};
-
-
-
-type Props = {
-    product: Product;
-    onCreated: (productId: string, variant: Variant) => void;
-};
-
-export default function VariantForm({ product, onCreated }: Props) {
+/**
+ * Komponente für das Erstellen einer neuen Variante zu einem spezifischen Produkt.
+ * Enthält ein Formular zur Eingabe von Baureihe und Modellen.
+ * props - Die Produkteigenschaften und das onCreated-Callback
+ */
+export default function VariantForm({ Product, onCreated }: VariantFormProps) {
     const [baureihe, setBaureihe] = useState("");
     const [modelle, setModelle] = useState("");
 
@@ -41,9 +27,9 @@ export default function VariantForm({ product, onCreated }: Props) {
         };
 
         try {
-            const newVariant = await createVariant(product._id, [assignment]);
+            const newVariant = await createVariant(Product._id, [assignment]);
 
-            if (onCreated) onCreated(product._id, newVariant);
+            if (onCreated) onCreated(Product._id, newVariant);
 
             setBaureihe("");
             setModelle("");
@@ -54,7 +40,7 @@ export default function VariantForm({ product, onCreated }: Props) {
 
     return (
         <form onSubmit={handleSubmit}>
-            <h3>Variante hinzufügen für: {product.name}</h3>
+            <h3>Variante hinzufügen für: {Product.name}</h3>
 
             <input placeholder="Baureihe (z.B. 964) "
                 value={baureihe}

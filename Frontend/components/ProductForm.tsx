@@ -5,6 +5,11 @@ import { createProduct } from "../lib/api";
 import { Product, Props } from "../types";
 
 
+/**
+ * Komponente für das Erstellen eines neuen Produkts.
+ * Enthält ein einfaches Formular zur Eingabe des Produktnamens.
+ * props - Die Props der Komponente, inklusive onCreated-Callback
+ */
 export default function ProductForm({ onCreated }: Props) {
     const [name, setName] = useState("");
 

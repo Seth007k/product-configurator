@@ -9,6 +9,11 @@ type ProductItemProps = {
     product: Product;
 };
 
+/**
+ * Komponente, die ein einzelnes Produkt sowie dessen Varianten darstellt.
+ * Ruft die dazugehörigen Varianten selbstständig vom Backend ab.
+ * props - Enthält das darzustellende Produkt
+ */
 export default function ProductItem({ product }: ProductItemProps) {
     const [variants, setVariants] = useState<Variant[]>([]);
 

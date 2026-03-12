@@ -11,6 +11,13 @@ export class ProductsService {
         @InjectModel(Product.name) private productModel: Model<ProductDocument>,
     ) { }
 
+    /**
+     * Erstellt ein neues Produkt in der Datenbank.
+     * Generiert automatisch einen eindeutigen Produktcode basierend auf dem Namen.
+     * 
+     * createProductDto - Das DTO mit den Produktdaten
+     * return -  Das gespeicherte Produkt-Dokument
+     */
     async create(createProductDto: CreateProductDto): Promise<Product> {
         let baseCode = generateProductCode(createProductDto.name)
         let code = baseCode
@@ -30,6 +37,11 @@ export class ProductsService {
         return product.save()
     }
 
+    /**
+     * Ruft alle Produkte aus der Datenbank ab.
+     * 
+     * return - Ein Array aller Produkte
+     */
     async findAll(): Promise<Product[]> {
         return this.productModel.find().exec();
     }

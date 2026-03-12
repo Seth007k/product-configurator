@@ -6,6 +6,10 @@ import ProductForm from "./ProductForm";
 import ProductItem from "./ProductItem";
 import { Product } from "../types";
 
+/**
+ * Hauptkomponente für die Anzeige aller Produkte und deren Varianten.
+ * Verwaltet den Status aller Produkte und lädt diese beim ersten Rendern.
+ */
 export default function ProductList() {
     const [products, setProducts] = useState<Product[]>([]);
 
