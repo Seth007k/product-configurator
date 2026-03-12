@@ -23,16 +23,18 @@ export default function ProductForm({ onCreated }: Props) {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <h2>Neues Produkt erstellen</h2>
+        <div className="form-container">
+            <form onSubmit={handleSubmit}>
+                <h2>Neues Produkt erstellen</h2>
 
-            <input
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="Produkt Name"
-            />
+                <input
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Produkt Name"
+                />
 
-            <button type="submit"> Produkt erstellen</button>
-        </form>
+                <button type="submit"> Produkt erstellen</button>
+            </form>
+        </div>
     )
 }

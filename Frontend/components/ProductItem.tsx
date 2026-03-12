@@ -25,7 +25,7 @@ export default function ProductItem({ product }: ProductItemProps) {
     };
 
     return (
-        <div style={{ border: "1px solid gray", padding: 10, marginBottom: 10 }}>
+        <div className="productItem-container" style={{ border: "1px solid gray", padding: 10, marginBottom: 10 }}>
             <strong>{product.name} - {product.code}</strong>
 
             <ul>

@@ -22,7 +22,7 @@ export default function ProductList() {
     }
 
     return (
-        <div>
+        <div className="main-container">
             <h2>Produkte & Varianten</h2>
 
             <ProductForm onCreated={handleProductCreated} />
