@@ -20,8 +20,8 @@ export class VariantsService {
 
         let nextValue = '01';
         if (variants.length > 0) {
-            const lastValue = parseInt(variants[variants.length - 1].value, 10);
-            nextValue = String(lastValue + 1).padStart(2, '0');
+            const lastValueNum = parseInt(variants[variants.length - 1].value, 10);
+            nextValue = String(lastValueNum + 1).padStart(2, '0');
         }
 
         const variant = new this.variantModel({
@@ -36,6 +36,7 @@ export class VariantsService {
     async findAllByProduct(productId: string): Promise<Variant[]> {
         return this.variantModel
             .find({ product: new Types.ObjectId(productId) })
+            .populate('product')
             .exec();
     }
 }
