@@ -20,6 +20,17 @@ services:
     depends_on:
       - mongo
     restart: unless-stopped
+  
+  frontend:
+    build: ./frontend
+    container_name: product-config-frontend
+    ports: 
+      - "3001:3001"
+    depends_on:
+      - backend
+    restart: unless-stopped
+    environment:
+      - NEXT_PUBLIC_API_URL=http://backend:3000
 
 volumes:
   mongo-data:
