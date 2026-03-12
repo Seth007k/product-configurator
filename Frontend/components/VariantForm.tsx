@@ -2,12 +2,7 @@
 
 import { useState } from "react";
 import { createVariant } from "../lib/api";
-import { Product, Variant, Assignment } from "../types";
-
-type VariantFormProps = {
-    product: Product;
-    onCreated?: (productId: string, variant: Variant) => void;
-};
+import { Product, Variant, Assignment, VariantFormProps } from "../types";
 
 /**
  * Komponente für das Erstellen einer neuen Variante zu einem spezifischen Produkt.

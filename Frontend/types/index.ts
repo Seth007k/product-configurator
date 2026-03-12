@@ -20,3 +20,12 @@ export type Props = {
     onCreated: (product: Product) => void;
 };
 
+export type ProductItemProps = {
+    product: Product;
+};
+
+export type VariantFormProps = {
+    product: Product;
+    onCreated?: (productId: string, variant: Variant) => void;
+};
+

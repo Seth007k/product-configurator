@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { createProduct } from "../lib/api";
-import { Product, Props } from "../types";
+import { Props } from "../types";
 
 
 /**
